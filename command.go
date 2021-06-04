@@ -6,11 +6,11 @@ import (
 
 type ValueType string
 
-var StringFlag ValueType = "string"
-var StringSliceFlag ValueType = "stringslice"
-var IntFlag ValueType = "int"
-var IntSliceFlag ValueType = "intslice"
-var BoolFlag ValueType = "bool"
+const StringFlag ValueType = "string"
+const StringSliceFlag ValueType = "stringslice"
+const IntFlag ValueType = "int"
+const IntSliceFlag ValueType = "intslice"
+const BoolFlag ValueType = "bool"
 
 type HandlerFunc func(interface{}, []string) error
 

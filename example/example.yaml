@@ -1,0 +1,5 @@
+# This file is picked up by default
+# The app will load a config in the current directory with the same name as the root command
+
+# Uncomment the following line and run 'go run main.go' to check
+# global: "from-example.yaml"
