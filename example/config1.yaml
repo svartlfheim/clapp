@@ -1,0 +1,2 @@
+global: "config1-global"
+my_config_var: "config1-my-config-var"
