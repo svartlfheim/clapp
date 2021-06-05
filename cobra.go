@@ -235,7 +235,7 @@ func (b *cobraBuilder) addChildCommands(bC builderCallback, cfg interface{}, chi
 	return nil
 }
 
-func (b *cobraBuilder) customConfigure(f func(interface{})) {
+func (b *cobraBuilder) customConfigure(f func(*cobra.Command)) {
 	f(b._cmd)
 }
 

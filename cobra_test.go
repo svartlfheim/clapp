@@ -744,7 +744,7 @@ func TestCobraBuilder_setHandler(t *testing.T) {
 	}
 
 	var expectedErr error = errors.New("we should get this back")
-	var h HandlerFunc = func(i interface{}, args []string) error {
+	var h HandlerFunc = func(i *cobra.Command, args []string) error {
 		return expectedErr
 	}
 
@@ -927,11 +927,7 @@ func TestCobraBuidler_customConfigure(t *testing.T) {
 		_cmd: &cobra.Command{},
 	}
 
-	cb.customConfigure(func(i interface{}) {
-		cmd, ok := i.(*cobra.Command)
-
-		assert.True(t, ok)
-
+	cb.customConfigure(func(cmd *cobra.Command) {
 		cmd.Use = "blah"
 	})
 

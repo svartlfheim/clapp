@@ -142,20 +142,16 @@ child:
 		},
 
 		// The function that is actually called when this command is run.
-		Handle: func(cmd interface{}, args []string) error {
-			// The library is designed so that cobra could be replaced later
-			// We'll typeassert it to the underlying type here so we can access it like a normal cobra handler
-			cobraCmd := cmd.(*cobra.Command)
-
+		Handle: func(cmd *cobra.Command, args []string) error {
 			// Now we get the config from the context
 			// Again the config could be of any type, so we need to typeassert here
-			cfg := clapp.ConfigFromContext(cobraCmd.Context()).(*myconfig)
+			cfg := clapp.ConfigFromContext(cmd.Context()).(*myconfig)
 
 			// Print out the values of the config
 			fmt.Printf("GlobalVar is:       %s\n", cfg.GlobalVar)
 			fmt.Printf("MyConfigVar var is: %s\n", cfg.MyConfigVar)
 			fmt.Printf("AnotherVar var is:  %s\n", anotherVar)
-			fmt.Printf("Command version is: %s\n", cobraCmd.Version)
+			fmt.Printf("Command version is: %s\n", cmd.Version)
 
 			return nil
 		},
@@ -163,11 +159,9 @@ child:
 		// This allows you to run a function on the underlying command
 		// It provides a way to do more complex operations on the underlying command
 		// We don't have to provide every property of the command by allowing this
-		CustomConfiguration: func(cmd interface{}) {
-			cobraCmd := cmd.(*cobra.Command)
-
+		CustomConfiguration: func(cmd *cobra.Command) {
 			// Just an example of modifying the underlying command
-			cobraCmd.Version = "1.1.1"
+			cmd.Version = "1.1.1"
 		},
 
 		Children: []clapp.Command{
@@ -204,20 +198,16 @@ child:
 				},
 		
 				// The function that is actually called when this command is run.
-				Handle: func(cmd interface{}, args []string) error {
-					// The library is designed so that cobra could be replaced later
-					// We'll typeassert it to the underlying type here so we can access it like a normal cobra handler
-					cobraCmd := cmd.(*cobra.Command)
-		
+				Handle: func(cmd *cobra.Command, args []string) error {
 					// Now we get the config from the context
 					// Again the config could be of any type, so we need to typeassert here
-					cfg := clapp.ConfigFromContext(cobraCmd.Context()).(*myconfig)
+					cfg := clapp.ConfigFromContext(cmd.Context()).(*myconfig)
 		
 					// Print out the values of the config
 					fmt.Printf("GlobalVar is:       %s\n", cfg.GlobalVar)
 					fmt.Printf("MyConfigVar var is: %s\n", cfg.MyConfigVar)
 					fmt.Printf("AnotherVar var is:  %s\n", anotherVar)
-					fmt.Printf("Command version is: %s\n", cobraCmd.Version)
+					fmt.Printf("Command version is: %s\n", cmd.Version)
 					fmt.Printf("Required value is:  %d\n", required)
 		
 					return nil
@@ -226,11 +216,9 @@ child:
 				// This allows you to run a function on the underlying command
 				// It provides a way to do more complex operations on the underlying command
 				// We don't have to provide every property of the command by allowing this
-				CustomConfiguration: func(cmd interface{}) {
-					cobraCmd := cmd.(*cobra.Command)
-		
+				CustomConfiguration: func(cmd *cobra.Command) {
 					// Just an example of modifying the underlying command
-					cobraCmd.Version = "1.3.1"
+					cmd.Version = "1.3.1"
 				},
 			},
 		},
