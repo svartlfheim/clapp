@@ -2,6 +2,8 @@ package clapp
 
 import (
 	"context"
+
+	"github.com/spf13/cobra"
 )
 
 type ValueType string
@@ -12,7 +14,7 @@ const IntFlag ValueType = "int"
 const IntSliceFlag ValueType = "intslice"
 const BoolFlag ValueType = "bool"
 
-type HandlerFunc func(interface{}, []string) error
+type HandlerFunc func(*cobra.Command, []string) error
 
 type Descriptions struct {
 	Long  string
@@ -33,8 +35,8 @@ type Command struct {
 	Descriptions        Descriptions
 	LocalFlags          []Flag
 	PersistentFlags     []Flag
-	Handle              func(interface{}, []string) error
-	CustomConfiguration func(interface{})
+	Handle              HandlerFunc
+	CustomConfiguration func(*cobra.Command)
 	Children            []Command
 }
 
